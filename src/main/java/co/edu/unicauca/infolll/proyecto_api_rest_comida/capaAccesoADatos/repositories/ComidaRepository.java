@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import co.edu.unicauca.infolll.proyecto_api_rest_comida.capaAccesoADatos.models.ComidaEntity;
+import co.edu.unicauca.infolll.proyecto_api_rest_comida.capaAccesoADatos.models.EnumTipodeComida;
 @Repository
 public class ComidaRepository {
    private ArrayList<ComidaEntity> listaDeComidas;
@@ -76,13 +77,13 @@ public class ComidaRepository {
 	}
 
 	private void cargarComidas() {
-		ComidaEntity objComida1 = new ComidaEntity("101", "Burguer Nativa", "Comida Rapida", "50.000", 5);
+		ComidaEntity objComida1 = new ComidaEntity("101", "Burguer Nativa", EnumTipodeComida.COMIDA_RAPIDA, "50.000", 5);
 		this.listaDeComidas.add(objComida1);
-		ComidaEntity objComida2 = new ComidaEntity("102", "Sandwich Nativo", "Comida Rapida", "60.000", 7);
+		ComidaEntity objComida2 = new ComidaEntity("102", "Sandwich Nativo", EnumTipodeComida.COMIDA_RAPIDA, "60.000", 7);
 		this.listaDeComidas.add(objComida2);
-		ComidaEntity objComida3 = new ComidaEntity("103", "Lasagna Nativa", "Especial", "70.000", 4);
+		ComidaEntity objComida3 = new ComidaEntity("103", "Lasagna Nativa", EnumTipodeComida.ESPECIAL, "70.000", 4);
 		this.listaDeComidas.add(objComida3);
-		ComidaEntity objComida = new ComidaEntity("104", "Soda Mistica", "Bebidas", "25.000", 5);
-		this.listaDeComidas.add(objComida);
-	} 
+		ComidaEntity objComida4 = new ComidaEntity("104", "Soda Mistica", EnumTipodeComida.BEBIDAS, "25.000", 5);
+		this.listaDeComidas.add(objComida4);
+	}
 }

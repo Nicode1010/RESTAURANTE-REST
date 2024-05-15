@@ -9,12 +9,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ComidaEntity {
+	//se definen atributos
     private String codigo;
 	private String nombre;
-	private String tipo;
+	private EnumTipodeComida tipo;
 	private String precio;
 	private Integer cantidadIngredientes;
-
+//Constructor vacio que no toma ningun argumento
+//Cuando se crea un objeto ComidaEntity no se inicializan los valores de sus atributos
     public ComidaEntity(){
 
     }
