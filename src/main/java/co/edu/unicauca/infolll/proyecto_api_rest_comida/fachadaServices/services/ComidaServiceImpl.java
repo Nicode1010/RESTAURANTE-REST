@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.infolll.proyecto_api_rest_comida.capaAccesoADatos.models.ComidaEntity;
-import co.edu.unicauca.infolll.proyecto_api_rest_comida.capaAccesoADatos.repositories.ComidaRepository;
+import co.edu.unicauca.infolll.proyecto_api_rest_comida.capaAccesoADatos.repositories.ComidaRepositoryBaseDatos;
 import co.edu.unicauca.infolll.proyecto_api_rest_comida.fachadaServices.DTO.ComidaDTO;
 
 @Service
 public class ComidaServiceImpl implements IComidaService {
     
     @Autowired
-	private ComidaRepository servicioAccesoBaseDatos;
+	private ComidaRepositoryBaseDatos servicioAccesoBaseDatos;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -30,8 +30,8 @@ public class ComidaServiceImpl implements IComidaService {
 	}
 
     @Override
-	public ComidaDTO findById(String codigo) {
-		ComidaEntity objComidaEntity = this.servicioAccesoBaseDatos.findById(codigo);
+	public ComidaDTO findById(Integer id) {
+		ComidaEntity objComidaEntity = this.servicioAccesoBaseDatos.findById(id);
 		ComidaDTO comidaDTO = this.modelMapper.map(objComidaEntity, ComidaDTO.class);
 		return comidaDTO;
 	}
@@ -45,15 +45,29 @@ public class ComidaServiceImpl implements IComidaService {
 	}
 
 	@Override
-	public ComidaDTO update(String codigo, ComidaDTO comida) {
+	public ComidaDTO update(Integer id, ComidaDTO comida) {
 		ComidaEntity comidaEntity = this.modelMapper.map(comida, ComidaEntity.class);
-		ComidaEntity comidaEntityActualizado = this.servicioAccesoBaseDatos.update(codigo, comidaEntity);
+		ComidaEntity comidaEntityActualizado = this.servicioAccesoBaseDatos.update(id, comidaEntity);
 		ComidaDTO comidaDTO = this.modelMapper.map(comidaEntityActualizado, ComidaDTO.class);
 		return comidaDTO;
 	}
 
 	@Override
-	public boolean delete(String codigo) {
-		return this.servicioAccesoBaseDatos.delete(codigo);
+	public boolean delete(Integer id) {
+		return this.servicioAccesoBaseDatos.delete(id);
+	}
+	@Override
+	public boolean existById(Integer id) {
+		boolean bandera = false;
+		ComidaEntity objComidaEntity = this.servicioAccesoBaseDatos.findById(id);
+		if (objComidaEntity != null)
+			bandera = true;
+
+		return bandera;
+	}
+
+	@Override
+	public boolean existByNombre(String nombre) {
+		return this.servicioAccesoBaseDatos.findByNombre(nombre);
 	}
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ComidaDTO {
-    private String codigo;
+    private Integer idComida;
 	private String nombre;
 	private String tipo;
 	private String precio;

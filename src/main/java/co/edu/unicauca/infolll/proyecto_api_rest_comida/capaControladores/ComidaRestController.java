@@ -20,22 +20,33 @@ import co.edu.unicauca.infolll.proyecto_api_rest_comida.fachadaServices.services
 @RestController
 @RequestMapping("/api")
 public class ComidaRestController {
-    
-    @Autowired
+
+	@Autowired
 	private IComidaService comidaService;
 
 	@GetMapping("/comidas")
-	public List<ComidaDTO> index() {
+	public List<ComidaDTO> show() {
 		return comidaService.findAll();
 	}
 
-	@GetMapping("/comidas/{codigo}")
-	public ComidaDTO show(@PathVariable String codigo) {
+	@GetMapping("/comidas/{id}")
+	public ComidaDTO show(@PathVariable Integer id) {
 		ComidaDTO objComida = null;
-		objComida = comidaService.findById(codigo);
+		objComida = comidaService.findById(id);
 		return objComida;
 	}
 
+	@GetMapping("/comidas/consultarSiExiste/{id}")
+	public boolean consultarSiExistePorID(@PathVariable Integer id) {
+		Boolean bandera = comidaService.existById(id);
+		return bandera;
+	}
+
+	@GetMapping("/comidas/consultarSiExistePorNombre/{nombre}")
+	public boolean consultarSiExistePorNombre(@PathVariable String nombre) {
+		Boolean bandera = comidaService.existByNombre(nombre);
+		return bandera;
+	}
 
 	@PostMapping("/comidas")
 	public ComidaDTO create(@RequestBody ComidaDTO comida) {
@@ -44,33 +55,27 @@ public class ComidaRestController {
 		return objComida;
 	}
 
-	@PutMapping("/comidas/{codigo}")
-	public ComidaDTO update(@RequestBody ComidaDTO comida, @PathVariable String codigo) {
+	@PutMapping("/comidas/{id}")
+	public ComidaDTO update(@RequestBody ComidaDTO comida, @PathVariable Integer id) {
 		ComidaDTO objComida = null;
-		ComidaDTO comidaActual = comidaService.findById(codigo);
+		ComidaDTO comidaActual = comidaService.findById(id);
 		if (comidaActual != null) {
-			objComida = comidaService.update(codigo, comida);
+			objComida = comidaService.update(id, comida);
 		}
 		return objComida;
 	}
 
-	@DeleteMapping("/comidas/{codigo}")
-	public Boolean delete(@PathVariable String codigo ) {
+	@DeleteMapping("/comidas/{id}")
+	public Boolean delete(@PathVariable Integer id) {
 		Boolean bandera = false;
-		ComidaDTO comidaActual = comidaService.findById(codigo);
+		ComidaDTO comidaActual = comidaService.findById(id);
 		if (comidaActual != null) {
-			bandera = comidaService.delete(codigo);
+			bandera = comidaService.delete(id);
 		}
 		return bandera;
 
 	}
 
-	@GetMapping("/comidas/listarCabeceras")
-	public void listarCabeceras(@RequestHeader Map<String, String> headers) {
-		System.out.println("cabeceras");
-		headers.forEach((key, value) -> {
-			System.out.println(String.format("Cabecera '%s' = %s", key, value));
-		});
-	}
-
 }
+
+

@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class mapper {
-     @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
+    @Bean
+    public ModelMapper generarMapeador() {
+        System.out.println("invocando método automáticamente");
+        ModelMapper objMapeador = new ModelMapper();
+        return objMapeador;
     }
 }

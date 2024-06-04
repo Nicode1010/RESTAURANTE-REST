@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ComidaEntity {
 	//se definen atributos
-    private String codigo;
+    private Integer idComida;
 	private String nombre;
 	private EnumTipodeComida tipo;
 	private String precio;
